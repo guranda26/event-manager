@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import useRequest from "../hooks/useRequest";
 
 const MainPage = () => {
-  const { response, loading, err } = useFetch({
+  const { response, loading, err, resendRequest } = useFetch({
     url: "/api/v1/users",
     method: "GET",
   });
+  const { sendRequest } = useRequest({ method: "DELETE" });
   const todo =
     response?.items.map((user) => {
       return {
@@ -13,6 +16,10 @@ const MainPage = () => {
         id: user._uuid,
       };
     }) || [];
+
+  const onDelete = (userId) => {
+    sendRequest(null, `/api/v1/users/${userId}`).then(() => resendRequest());
+  };
 
   if (loading)
     return (
@@ -26,8 +33,11 @@ const MainPage = () => {
 
   return (
     <div className="App">
-      {/* <button onClick={getUsers}>GET tasks</button>
-  <button onClick={() => setTodo([])}>Clear tasks</button> */}
+      <div>
+        <Link to="/create" className="link">
+          Enter New Data
+        </Link>
+      </div>
 
       {todo.map((user) => (
         <div
@@ -39,6 +49,8 @@ const MainPage = () => {
           <h4>
             {user.isCompleted ? "Task is completed" : "Task is not completed"}
           </h4>
+          <Link to={`/update/${user.id}`}>Edit</Link>
+          <button onClick={() => onDelete(user.id)}>delete</button>
         </div>
       ))}
     </div>

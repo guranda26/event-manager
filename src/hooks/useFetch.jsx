@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // import REACT_APP_API_KEY from "./env";
 
 const useFetch = ({ url, method }) => {
@@ -7,7 +7,7 @@ const useFetch = ({ url, method }) => {
   const [err, setErr] = useState(null);
   const API_KEY = "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
 
-  useEffect(() => {
+  const onFetch = useCallback(() => {
     setLoading(true);
     fetch(url, {
       method,
@@ -35,7 +35,11 @@ const useFetch = ({ url, method }) => {
     };
   }, [url, method]);
 
-  return { response, loading, err };
+  useEffect(() => {
+    onFetch();
+  }, [onFetch]);
+
+  return { response, loading, err, resendRequest: onFetch };
 };
 
 export default useFetch;

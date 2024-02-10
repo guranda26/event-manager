@@ -14,8 +14,9 @@ const UserForm = ({ onFormSubmit }) => {
       <input
         type="text"
         placeholder="Task Name"
-        value={name}
+        // value={name}
         onChange={(e) => setName(e.target.value)}
+        defaultValue={setName}
       />
       <input
         type="checkbox"
