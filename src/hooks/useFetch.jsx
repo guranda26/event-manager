@@ -5,14 +5,16 @@ const useFetch = ({ url, method }) => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
+  const API_KEY = "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
 
   useEffect(() => {
     setLoading(true);
     fetch(url, {
       method,
       headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+        // Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     })
       .then((res) => {

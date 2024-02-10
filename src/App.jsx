@@ -1,6 +1,3 @@
-import useFetch from "./hooks/useFetch";
-
-import { useEffect, useState } from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import routes from "./router/routes";

@@ -1,18 +1,21 @@
 import UserForm from "../components/UserForm";
-
+const API_KEY = "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
 const CreatePage = () => {
   const onFormSubmit = (name, isCompleted) => {
     fetch("/api/v1/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        Authorization: `Bearer ${API_KEY}`,
+        // Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
       body: JSON.stringify([{ name, isCompleted }]),
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error(`Response failed`);
+          return res.text().then((text) => {
+            throw new Error(text || "Response failed");
+          });
         }
         return res.json();
       })
