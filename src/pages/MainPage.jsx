@@ -30,6 +30,10 @@ const MainPage = () => {
     );
 
   if (err) return <div>{err.message}</div>;
+  const deadline = new Date();
+  const setDeadline = deadline.toLocaleDateString("ka-Ge", {
+    month: "long",
+  });
 
   return (
     <div className="App">
@@ -49,6 +53,9 @@ const MainPage = () => {
           <h4>
             {user.isCompleted ? "Task is completed" : "Task is not completed"}
           </h4>
+          <p>
+            Deadline: {`${setDeadline} ${Math.floor(Math.random() * 30) + 1} `}
+          </p>
           <Link to={`/update/${user.id}`}>Edit</Link>
           <button onClick={() => onDelete(user.id)}>delete</button>
         </div>
