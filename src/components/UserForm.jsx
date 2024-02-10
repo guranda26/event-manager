@@ -22,6 +22,7 @@ const UserForm = ({ onFormSubmit }) => {
         placeholder="Event Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        defaultValue={setName}
       />
       <div>
         <input

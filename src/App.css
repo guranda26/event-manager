@@ -24,6 +24,17 @@
   background-color: #61dafb;
 }
 
+.link {
+  display: flex;
+  justify-content: space-around;
+  font-size: 25px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  background-color: aquamarine;
+  margin: 0 40%;
+  padding: 10px 0;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
