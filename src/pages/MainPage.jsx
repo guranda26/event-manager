@@ -13,6 +13,10 @@ import {
 import styles from "./MainPage.module.css";
 import GStyles from "./GlobalPage.module.css";
 
+const deadline = new Date();
+const setDeadline = deadline.toLocaleDateString("ka-Ge", {
+  month: "long",
+});
 const MainPage = () => {
   const { lang } = useDictionaryContext();
 
