@@ -14,7 +14,6 @@ const useFetch = ({ url, method }) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
-        // Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     })
       .then((res) => {

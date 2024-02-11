@@ -1,39 +1,25 @@
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import useRequest from "../hooks/useRequest";
+import { useUsersContext } from "../contexts/UsersContext";
+import {
+  dictionaryOptions,
+  useDictionaryContext,
+} from "../contexts/TranslateContext";
 
+const deadline = new Date();
+const setDeadline = deadline.toLocaleDateString("ka-Ge", {
+  month: "long",
+});
 const MainPage = () => {
-  const { response, loading, err, resendRequest } = useFetch({
-    url: "/api/v1/users",
-    method: "GET",
-  });
-  const { sendRequest } = useRequest({ method: "DELETE" });
-  const todo =
-    response?.items.map((user) => {
-      return {
-        name: user.name,
-        isCompleted: user.isCompleted,
-        id: user._uuid,
-      };
-    }) || [];
+  const { lang } = useDictionaryContext();
+  const { todo, dataLoading, deleteLoading, onDelete } = useUsersContext();
 
-  const onDelete = (userId) => {
-    sendRequest(null, `/api/v1/users/${userId}`).then(() => resendRequest());
-  };
-
-  if (loading)
+  if (dataLoading || deleteLoading)
     return (
       <div>
         <p>Is Loading ...</p>
         <p>please wait</p>
       </div>
     );
-
-  if (err) return <div>{err.message}</div>;
-  const deadline = new Date();
-  const setDeadline = deadline.toLocaleDateString("ka-Ge", {
-    month: "long",
-  });
 
   return (
     <div className="App">
@@ -58,6 +44,9 @@ const MainPage = () => {
           </p>
           <Link to={`/update/${user.id}`}>Edit</Link>
           <button onClick={() => onDelete(user.id)}>delete</button>
+          <div>
+            <p>{dictionaryOptions[lang]}</p>
+          </div>
         </div>
       ))}
     </div>
