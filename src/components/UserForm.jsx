@@ -1,4 +1,8 @@
 import { useState } from "react";
+import {
+  taskOptions,
+  useDictionaryContext,
+} from "../contexts/TranslateContext";
 
 const UserForm = ({ onFormSubmit }) => {
   const [name, setName] = useState("");
@@ -8,13 +12,13 @@ const UserForm = ({ onFormSubmit }) => {
     e.preventDefault();
     onFormSubmit(name, isCompleted);
   };
+  const { lang } = useDictionaryContext();
 
   return (
     <form onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="Task Name"
-        // value={name}
         onChange={(e) => setName(e.target.value)}
         defaultValue={setName}
       />
@@ -24,7 +28,7 @@ const UserForm = ({ onFormSubmit }) => {
         checked={isCompleted}
         onChange={(e) => setIsCompleted(e.target.checked)}
       />
-      <label htmlFor="completed">Task is completed</label>
+      <label htmlFor="completed">{taskOptions[lang]}</label>
       <button>Submit</button>
     </form>
   );
