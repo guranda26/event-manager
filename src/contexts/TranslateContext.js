@@ -6,8 +6,46 @@ export const dictionaryOptions = {
 };
 
 export const taskOptions = {
-  ka: "დავალება შესრულებულია",
-  eng: "Task is completed",
+  ka: {
+    completed: "დავალება შესრულებულია",
+    notCompleted: "დავალება არ არის შესრულებული",
+    label: "შესრულებული",
+  },
+  eng: {
+    completed: "Event is completed",
+    notCompleted: "Event is not completed",
+    label: "Completed",
+  },
+};
+
+export const addEvent = {
+  ka: "ივენთების ჩამონათვალი",
+  eng: "Event List",
+};
+export const eventName = {
+  ka: "ივენთის სახელწოდება",
+  eng: "Event Name",
+};
+export const editOptions = {
+  ka: "ივენთის რედაქტირება",
+  eng: "Edit Event Details",
+};
+export const deleteEvent = {
+  ka: "ივენთის გაუქმება",
+  eng: "Cancel Event",
+};
+export const eventDate = {
+  ka: "თარიღი",
+  eng: "Date",
+};
+export const mainPage = {
+  ka: "მთავარი გვერდი",
+  eng: "Main Page",
+};
+
+export const createEvent = {
+  ka: "ახალი ივენთის დამატება",
+  eng: "Create New Event",
 };
 
 const DictionaryContext = createContext(null);

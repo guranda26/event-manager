@@ -5,7 +5,9 @@ import {
   dictionaryOptions,
   useDictionaryContext,
 } from "../contexts/TranslateContext";
-const API_KEY = "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
+import styles from "./CreatePage.module.css";
+import GStyles from "./GlobalPage.module.css";
+
 const CreatePage = () => {
   const { sendRequest, loading } = useRequest({
     url: "/api/v1/users",
@@ -20,12 +22,12 @@ const CreatePage = () => {
       .catch((error) => console.log(error));
   };
 
-  if (loading) return <p>Is Loading ...</p>;
+  if (loading) return <div className={GStyles.loading}>Is Loading ...</div>;
   return (
-    <>
+    <div className={styles.formWrapper}>
       <UserForm onFormSubmit={onSubmit} />
       <p>{dictionaryOptions[lang]}</p>
-    </>
+    </div>
   );
 };
 

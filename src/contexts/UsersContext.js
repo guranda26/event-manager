@@ -16,6 +16,7 @@ const UsersContextProvider = ({ children }) => {
   const { sendRequest, loading: deleteLoading } = useRequest({
     method: "DELETE",
   });
+
   const todo = useMemo(() => {
     return (
       response?.items.map((user) => {
@@ -29,10 +30,10 @@ const UsersContextProvider = ({ children }) => {
   }, [response]);
 
   const onDelete = useCallback(
-    (sendRequest) => (userId) => {
-      sendRequest(null, `/api/v1/users/${userId}`).then(() => resendRequest());
+    (userId) => {
+      sendRequest(null, `/api/v1/users/${userId}`).then(resendRequest);
     },
-    [resendRequest]
+    [sendRequest, resendRequest]
   );
 
   const contextValue = useMemo(

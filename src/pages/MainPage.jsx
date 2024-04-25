@@ -1,31 +1,46 @@
 import { Link } from "react-router-dom";
 import { useUsersContext } from "../contexts/UsersContext";
 import {
+  addEvent,
+  deleteEvent,
   dictionaryOptions,
+  editOptions,
+  eventDate,
+  eventName,
+  taskOptions,
   useDictionaryContext,
 } from "../contexts/TranslateContext";
+import styles from "./MainPage.module.css";
+import GStyles from "./GlobalPage.module.css";
 
-const deadline = new Date();
-const setDeadline = deadline.toLocaleDateString("ka-Ge", {
-  month: "long",
-});
 const MainPage = () => {
   const { lang } = useDictionaryContext();
-  const { todo, dataLoading, deleteLoading, onDelete } = useUsersContext();
 
+  const { todo, dataLoading, deleteLoading, onDelete } = useUsersContext();
+  const handleDelete = (userId) => {
+    onDelete(userId);
+  };
   if (dataLoading || deleteLoading)
     return (
-      <div>
+      <div className={GStyles.loading}>
         <p>Is Loading ...</p>
-        <p>please wait</p>
+        <p>Please wait</p>
       </div>
     );
 
+  const deadline = new Date();
+  const setDeadline = deadline.toLocaleDateString(
+    lang === "ka" ? "ka-GE" : "en-US",
+    {
+      month: "long",
+    }
+  );
+
   return (
-    <div className="App">
+    <div className={styles.app}>
       <div>
-        <Link to="/create" className="link">
-          Enter New Data
+        <Link to="/create" className={styles.link}>
+          {addEvent[lang]}
         </Link>
       </div>
 
@@ -33,22 +48,33 @@ const MainPage = () => {
         <div
           key={user.id}
           style={{ border: "1px solid gold" }}
-          className="tasks"
+          className={styles.events}
         >
-          <h3>Task: {user.name}</h3>
+          <h2>
+            {eventName[lang]}: <span>{user.name}</span>
+          </h2>
           <h4>
-            {user.isCompleted ? "Task is completed" : "Task is not completed"}
+            {user.isCompleted
+              ? taskOptions[lang].completed
+              : taskOptions[lang].notCompleted}
           </h4>
+
           <p>
-            Deadline: {`${setDeadline} ${Math.floor(Math.random() * 30) + 1} `}
+            {eventDate[lang]}:{" "}
+            {`${setDeadline} ${Math.floor(Math.random() * 30) + 1} `}
           </p>
-          <Link to={`/update/${user.id}`}>Edit</Link>
-          <button onClick={() => onDelete(user.id)}>delete</button>
-          <div>
-            <p>{dictionaryOptions[lang]}</p>
-          </div>
+          <Link to={`/update/${user.id}`} className={GStyles.editLink}>
+            {editOptions[lang]}
+          </Link>
+          <button
+            onClick={() => handleDelete(user.id)}
+            className={styles.cancelEvent}
+          >
+            {deleteEvent[lang]}
+          </button>
         </div>
       ))}
+      <p>{dictionaryOptions[lang]}</p>
     </div>
   );
 };

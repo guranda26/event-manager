@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-// import REACT_APP_API_KEY from "./env";
 
 const useFetch = ({ url, method }) => {
   const [response, setResponse] = useState(null);

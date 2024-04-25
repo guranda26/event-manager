@@ -23,10 +23,6 @@ const routes = [
           <div>
             <UsersContextProvider>
               <MainPage />
-
-              <p>This is a divider</p>
-
-              <MainPage />
             </UsersContextProvider>
           </div>
         ),
