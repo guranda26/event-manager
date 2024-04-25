@@ -14,7 +14,6 @@ const UserForm = ({ onFormSubmit }) => {
     e.preventDefault();
     onFormSubmit(name, isCompleted);
   };
-  const { lang } = useDictionaryContext();
 
   return (
     <form onSubmit={onSubmit} className={GStyles.form}>
