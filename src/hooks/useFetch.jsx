@@ -4,7 +4,9 @@ const useFetch = ({ url, method }) => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
-  const API_KEY = "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
+  // const REACT_APP_API_KEY =
+  //   "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
+  const REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
 
   const onFetch = useCallback(() => {
     setLoading(true);
@@ -12,7 +14,7 @@ const useFetch = ({ url, method }) => {
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${API_KEY}`,
+        Authorization: `Bearer ${REACT_APP_API_KEY}`,
       },
     })
       .then((res) => {
@@ -31,11 +33,11 @@ const useFetch = ({ url, method }) => {
       setLoading(false);
       setErr(null);
     };
-  }, [url, method]);
+  }, [url, method, REACT_APP_API_KEY]);
 
   useEffect(() => {
     onFetch();
-  }, [onFetch]);
+  }, [onFetch, REACT_APP_API_KEY]);
 
   return { response, loading, err, resendRequest: onFetch };
 };
