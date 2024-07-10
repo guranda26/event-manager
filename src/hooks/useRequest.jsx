@@ -5,6 +5,7 @@ const useRequest = ({ url, method }) => {
   //   "zemvDlvtavG4trFqzcyYlOX0SHH_-hx8_z7YG56INKw9OFLh6A";
 
   const REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
+  console.log(process.env.REACT_APP_API_KEY);
 
   const sendRequest = async (body, del) => {
     setLoading(true);
