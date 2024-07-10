@@ -12,7 +12,7 @@ const useRequest = ({ url, method }) => {
     const res = await fetch(url || del, {
       method,
       headers: {
-        "Content-type": "application/json",
+        "Content-type": "/application/json",
         Authorization: `Bearer ${REACT_APP_API_KEY}`,
       },
       body: !!body && body !== "GET" ? JSON.stringify(body) : undefined,

@@ -13,7 +13,7 @@ const useFetch = ({ url, method }) => {
     fetch(url, {
       method,
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "/application/json",
         Authorization: `Bearer ${REACT_APP_API_KEY}`,
       },
     })
